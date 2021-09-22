@@ -33,6 +33,7 @@ import org.json.JSONObject;
 public class FirstFragment extends BaseFragment {
 
     private FragmentFirstBinding binding;
+    private FragmentsManager fm;
 
     public FirstFragment(String type) {
         super(type);
@@ -70,12 +71,12 @@ public class FirstFragment extends BaseFragment {
         stringMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ResponseWeather>() {
             @Override
             public void onChanged(ResponseWeather s) {
-                FragmentsManager fm=new FragmentsManager(getChildFragmentManager(),R.id.first_layout_list);
+                fm=new FragmentsManager(getChildFragmentManager(),R.id.first_layout_list);
                 fm.addFragment(new Fragment0("frag0".concat(getType())))
                         .addFragment(new Fragment_1("frag1".concat(getType())))
                         .addFragment(new Fragment_2("flag2".concat(getType())))
                         .addFragment(new Fragment_3("flag3".concat(getType())))
-                        .addCommit();
+                        .flash();
                 EventBus.getDefault().post(new EventMainUI(200,getType(),s));
             }
         });

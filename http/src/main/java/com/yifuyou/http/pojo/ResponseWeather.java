@@ -1,12 +1,14 @@
 package com.yifuyou.http.pojo;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
 public class ResponseWeather {
-
+    public static final String TAG = "ResponseWeather";
     private String cityid;
 
     private String city;
@@ -20,6 +22,7 @@ public class ResponseWeather {
         ResponseWeather responseWeather = new ResponseWeather();
 
         JSONObject jsonObject=new JSONObject(source);
+        Log.i(TAG, "wrapperJson: source  :"+source);
         responseWeather.cityid=jsonObject.getString("cityid");
         responseWeather.city=jsonObject.getString("city");
         responseWeather.cityEn= jsonObject.getString("cityEn");

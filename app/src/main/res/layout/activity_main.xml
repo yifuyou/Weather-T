@@ -26,6 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:orientation="horizontal"
+                android:gravity="center_vertical"
                 >
 
                 <TextView
@@ -37,11 +38,7 @@
                     android:text="@string/app_name"
                     android:gravity="center"
                     />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/main_layout_index"
-                    />
+
             </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
@@ -49,12 +46,20 @@
 
 <!--    <include layout="@layout/content_main" />-->
 
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/weather_view_pager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
 
+<!--
         <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/weather_view_pager"
+            android:contentDescription="@string/viewpager_description"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            />
+            />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

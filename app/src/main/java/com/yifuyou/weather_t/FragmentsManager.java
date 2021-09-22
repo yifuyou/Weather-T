@@ -87,14 +87,11 @@ public class FragmentsManager {
     public void addCommit(){
         FragmentTransaction transaction = fManager.beginTransaction();
         if (fManager.getFragments().isEmpty()) {
-
-            System.out.println("================");
             for(int i:indexes){
                 BaseFragment fragment = fragments.get(indexes.get(i));
                 transaction.add(layoutId,fragment,fragment.getType());
             }
         }else{
-            System.out.println("----------------");
             List<Fragment> fragmentList = fManager.getFragments();
             for(int i:indexes){
                 BaseFragment fragment = this.fragments.get(i);

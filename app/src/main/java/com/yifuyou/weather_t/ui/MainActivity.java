@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.yifuyou.weather_t.CitiesWeatherViewPagerAdapter;
 import com.yifuyou.weather_t.R;
+import com.yifuyou.weather_t.ViewPager2Adapter;
 import com.yifuyou.weather_t.commom.EventMainUI;
 import com.yifuyou.weather_t.commom.SharedPUtil;
 import com.yifuyou.weather_t.databinding.ActivityMainBinding;
@@ -25,26 +27,13 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private ActivityMainBinding binding;
     private ArrayList<String> cities;
     private String city;
     private ViewPager.OnPageChangeListener pageChangeListener;
     private CitiesWeatherViewPagerAdapter adapter;
+    private ViewPager2Adapter adapter2;
 
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        log("onRestoreInstanceState start");
-        super.onRestoreInstanceState(savedInstanceState);
-        log("onRestoreInstanceState end");
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        log("onSaveInstanceState start");
-        super.onSaveInstanceState(outState, outPersistentState);
-        log("onSaveInstanceState");
-    }
 
 
 
@@ -62,10 +51,11 @@ public class MainActivity extends AppCompatActivity {
         //title 位置需要自定义，所以必须隐藏默认title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        cities.add(city);
 
-        adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
-        binding.weatherViewPager.setAdapter( adapter);
+//        adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
+//        binding.weatherViewPager.setAdapter( adapter);
+        adapter2 = new ViewPager2Adapter(getSupportFragmentManager(),getLifecycle(),cities);
+        binding.weatherViewPager.setAdapter(adapter2);
         binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
 
 
@@ -85,7 +75,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-        binding.weatherViewPager.addOnPageChangeListener(pageChangeListener);
+//        binding.weatherViewPager.addOnPageChangeListener(pageChangeListener);
+        binding.weatherViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                binding.mainLayoutCity.setText(cities.get(position));
+
+            }
+        });
         binding.weatherViewPager.setOffscreenPageLimit(1);
         binding.mainLayoutCity.setText(city);
         EventBus.getDefault().register(this);
@@ -123,11 +121,25 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(new Intent(MainActivity.this, SecondActivity.class));
             return true;
         }else if (id == R.id.action_addPlace) {
-
-            city=(city.equals("广州")?"北京":"广州");
+            int index=cities.indexOf(city);
+            city="广州";
             binding.mainLayoutCity.setText(city);
-            adapter.notifyCitiesChange(city,CitiesWeatherViewPagerAdapter.TYPE_ADD);
+//            adapter.notifyCitiesChange(city,CitiesWeatherViewPagerAdapter.TYPE_ADD);
 
+            if(cities.contains(city)){
+                cities=new ArrayList<>();
+                cities.add(0,"上海");
+                cities.add(1,"西安");
+                cities.add(2,"南昌");
+
+            }else{
+                cities=new ArrayList<>();
+                cities.add(0,city);
+                cities.add(1,"深圳");
+            }
+            log(cities.toString());
+            adapter2.notifyCitiesChange(cities);
+            binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
             return true;
         }
 

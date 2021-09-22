@@ -19,6 +19,10 @@ import com.yifuyou.weather_t.ui.FirstFragment;
 
 import java.util.ArrayList;
 
+/**
+ * adapter for  viewpager
+ */
+
 public class CitiesWeatherViewPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<String> cities;
     private ArrayList<FirstFragment> fragments;
