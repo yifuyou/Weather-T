@@ -1,0 +1,8 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="big_image">80dp</dimen>
+    <dimen name="big_textView">80dp</dimen>
+    <dimen name="mid_textView_high">40dp</dimen>
+    <dimen name="default_textView_high">20dp</dimen>
+    <dimen name="fragment_margin_top">10dp</dimen>
+</resources>

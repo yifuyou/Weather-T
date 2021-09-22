@@ -1,0 +1,43 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.WeatherT" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.WeatherT.NoActionBar" parent="Theme.WeatherT">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.WeatherT.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColorPrimary">@color/toolbar_text_color</item>
+    </style>
+
+    <style name="Theme.WeatherT.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" >
+        <item name="popupMenuBackground">@drawable/bg_p2_fragment</item>
+    </style>
+
+    <style name="item_fragment_style" >
+        <item name="android:background">@drawable/bg_p2_fragment</item>
+        <item name="android:layout_marginTop">@dimen/fragment_margin_top</item>
+    </style>
+    
+    
+    <style name="Theme.WeatherT.launch">
+        <item name="android:windowBackground">@drawable/start_page</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+
+    </style>
+    
+</resources>
