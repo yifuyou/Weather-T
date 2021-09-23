@@ -9,4 +9,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="toolbar_text_color">#ff004f8f</color>
+    <color name="toolbar_background_color">#00000000</color>
+    <color name="fc_p2_bg_solid_color">#44999999</color>
+    <color name="fc_p2_bg_stroke_color">#0099ff99</color>
 </resources>

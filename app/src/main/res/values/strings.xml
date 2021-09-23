@@ -11,4 +11,12 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="action_add_place">Add new place</string>
     <string name="viewpager_description">content page</string>
+    <string name="air_photo">AirPhoto</string>
+    <string name="default_weather">晴</string>
+    <string name="today_weather_photo">todayWeatherPhoto</string>
+    <string name="default_tem">0/0 ℃</string>
+    <string name="more_info">更多</string>
+    <string name="air_quality">空气质量</string>
+    <string name="tomorrow_weather_photo">tomorrowWeatherPhoto</string>
+    <string name="seven_day_weather_tab">七日天气预报</string>
 </resources>

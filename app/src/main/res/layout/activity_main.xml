@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#00000000"
+            android:background="@color/toolbar_background_color"
             app:contentInsetStart="@dimen/default_textView_high"
             app:popupTheme="@style/Theme.WeatherT.PopupOverlay" >
             <LinearLayout

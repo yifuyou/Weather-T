@@ -22,13 +22,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2"
-        app:srcCompat="@drawable/ic_home" />
+        app:srcCompat="@drawable/ic_home"
+        android:contentDescription="@string/today_weather_photo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/weather_today_text"
         android:lines="3"
-        android:text="dsfadf"
+        android:text="@string/more_info"
         app:layout_constraintStart_toStartOf="@id/imageView"
         app:layout_constraintEnd_toEndOf="@id/imageView"
         app:layout_constraintTop_toBottomOf="@id/imageView"
@@ -45,13 +46,14 @@
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_home" />
+        app:srcCompat="@drawable/ic_home"
+        android:contentDescription="@string/tomorrow_weather_photo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/weather_tomorrow_text"
         android:lines="3"
-        android:text="dsfadf"
+        android:text="@string/more_info"
         app:layout_constraintStart_toStartOf="@id/imageView2"
         app:layout_constraintEnd_toEndOf="@id/imageView2"
         app:layout_constraintTop_toBottomOf="@id/imageView2"

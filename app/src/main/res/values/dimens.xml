@@ -5,4 +5,9 @@
     <dimen name="mid_textView_high">40dp</dimen>
     <dimen name="default_textView_high">20dp</dimen>
     <dimen name="fragment_margin_top">10dp</dimen>
+    <!--
+    fragment child 背景
+    -->
+    <dimen name="fc_p2_bg_radius">10dp</dimen>
+    <dimen name="fc_p2_bg_stroke_w">2dp</dimen>
 </resources>
