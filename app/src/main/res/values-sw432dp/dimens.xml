@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    	
+    <dimen name="fab_margin">19.2000dp</dimen>
+    	
+    <dimen name="big_image">96.0000dp</dimen>
+    	
+    <dimen name="big_textView">96.0000dp</dimen>
+    	
+    <dimen name="mid_textView_high">48.0000dp</dimen>
+    	
+    <dimen name="default_textView_high">24.0000dp</dimen>
+    	
+    <dimen name="fragment_margin_top">12.0000dp</dimen>
+    	
+    <dimen name="fc_p2_bg_radius">12.0000dp</dimen>
+    	
+    <dimen name="fc_p2_bg_stroke_w">2.4000dp</dimen>
+</resources>
