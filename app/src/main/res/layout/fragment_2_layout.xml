@@ -5,9 +5,9 @@
     android:orientation="vertical"
     style="@style/item_fragment_style">
 
-<com.yifuyou.weather_t.PaintView
-    android:id="@+id/paint_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    <com.yifuyou.weather_t.PaintView
+        android:id="@+id/paint_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

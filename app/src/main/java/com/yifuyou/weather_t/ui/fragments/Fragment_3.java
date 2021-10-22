@@ -1,6 +1,7 @@
 package com.yifuyou.weather_t.ui.fragments;
 
 import android.animation.LayoutTransition;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ public class Fragment_3 extends BaseFragment {
         DaysWeatherListAdapter daysWeatherListAdapter = new DaysWeatherListAdapter(data);
         binding.f3ListLayout.removeAllViews();
         for (int i = 0; i < data.size(); i++) {
+
             binding.f3ListLayout.addView(daysWeatherListAdapter.getView(i,null, binding.f3ListLayout));
         }
     }

@@ -29,8 +29,8 @@ public class Fragment_2 extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          binding=Fragment2LayoutBinding.inflate(inflater,container,false);
 
-        int[] ys={15,17,18,25,26,25,23,20};
-        int[] xs={1,2,3,4,5,6,7,8};
+        int[] ys={27, 27, 28, 28, 28, 27, 25, 23, 21, 21, 21, 20, 20, 20, 19, 19, 19, 20, 20};
+        int[] xs={13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3, 4, 5, 6, 7};
 
         binding.paintView.setXYSource(xs,ys);
         System.out.println("set paint source");

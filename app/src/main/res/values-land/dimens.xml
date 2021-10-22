@@ -1,3 +1,4 @@
 <resources>
     <dimen name="fab_margin">48dp</dimen>
+    <dimen name="fragment_part_default_padding">20dp</dimen>
 </resources>

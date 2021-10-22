@@ -30,6 +30,8 @@
     <style name="item_fragment_style" >
         <item name="android:background">@drawable/bg_p2_fragment</item>
         <item name="android:layout_marginTop">@dimen/fragment_margin_top</item>
+        <item name="android:padding">@dimen/fragment_part_default_padding</item>
+        <item name="android:layout_margin">@dimen/fragment_part_default_margin</item>
     </style>
     
     

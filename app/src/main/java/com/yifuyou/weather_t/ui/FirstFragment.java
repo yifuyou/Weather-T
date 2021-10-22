@@ -64,6 +64,8 @@ public class FirstFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         setWeather(getType());
+//        fm=new FragmentsManager(getChildFragmentManager(),R.id.first_layout_list);
+//        fm.addFragment(new Fragment_2("flag2".concat(getType()))).flash();
     }
 
     private void setWeather(String city){

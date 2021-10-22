@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(new Intent(MainActivity.this, SecondActivity.class));
             return true;
         }else if (id == R.id.action_addPlace) {
-            int index=cities.indexOf(city);
+            /*int index=cities.indexOf(city);
             city="广州";
             binding.mainLayoutCity.setText(city);
 //            adapter.notifyCitiesChange(city,CitiesWeatherViewPagerAdapter.TYPE_ADD);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
             }
             log(cities.toString());
             adapter2.notifyCitiesChange(cities);
-            binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
+            binding.weatherViewPager.setCurrentItem(cities.indexOf(city));*/
             return true;
         }
 

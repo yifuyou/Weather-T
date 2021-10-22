@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/item_fragment_style">
+    style="@style/item_fragment_style"
+    >
 
     <TextView
         android:id="@+id/nowWeather_text"
@@ -45,7 +46,7 @@
     <TextView
         android:id="@+id/nowWeather_more"
         android:layout_width="@dimen/big_textView"
-        android:layout_height="@dimen/default_textView_high"
+        android:layout_height="wrap_content"
         android:autoSizeTextType="uniform"
         android:text="@string/more_info"
         app:layout_constraintEnd_toEndOf="@+id/nowWeather_text"

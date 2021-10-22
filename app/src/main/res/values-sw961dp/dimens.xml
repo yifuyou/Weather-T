@@ -16,4 +16,6 @@
     <dimen name="fc_p2_bg_radius">26.6944dp</dimen>
     	
     <dimen name="fc_p2_bg_stroke_w">5.3389dp</dimen>
+    	
+    <dimen name="fragment_part_default_padding">53.3889dp</dimen>
 </resources>
