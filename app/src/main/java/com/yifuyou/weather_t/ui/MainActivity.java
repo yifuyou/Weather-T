@@ -1,6 +1,7 @@
 package com.yifuyou.weather_t.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -48,7 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         setSupportActionBar(binding.toolbar);
+
         //title 位置需要自定义，所以必须隐藏默认title
+        assert getSupportActionBar()!=null;
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            startActivity(new Intent(MainActivity.this, CitiesManageActivity.class));
             return true;
         }else if (id == R.id.action_addPlace) {
             /*int index=cities.indexOf(city);
