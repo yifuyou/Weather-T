@@ -1,14 +1,22 @@
 package com.yifuyou.weather_t.commom;
 
+
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.util.JsonReader;
 import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -30,12 +38,13 @@ public class CityResource {
             data = new ArrayList<>();
             try {
                 inputStream = context.getAssets().open("citiesList.json");
-                StringBuilder builder = new StringBuilder();
-                byte[] bytes = new byte[1024];
-                while (inputStream.read(bytes) != -1) {
-                    builder.append(new String(bytes));
-                }
+                InputStreamReader reader = new InputStreamReader(inputStream);
 
+                StringBuilder builder = new StringBuilder();
+                char[] chs = new char[1024];
+                while (reader.read(chs) != -1) {
+                    builder.append(new String(chs));
+                }
                 JSONObject jsonObject = new JSONObject(builder.toString());
                 JSONArray array = jsonObject.getJSONArray("list");
 
@@ -88,11 +97,10 @@ public class CityResource {
 
     public ArrayList<CityNode> parseNodes() {
         if (cityNodesList != null && !cityNodesList.isEmpty()) {
-                Log.i("TAG", "parseNodes: "+cityNodesList);
+            Log.i("TAG", "parseNodes: " + cityNodesList);
             return cityNodesList;
         }
         cityNodesList = new ArrayList<>();
-        System.out.println(data);
         //避免栈溢出
         for (ArrayList<String> item : data) {
             if (item.isEmpty()) continue;
@@ -111,13 +119,26 @@ public class CityResource {
         for (ArrayList<String> item : data) {
             if (item.isEmpty()) continue;
             for (CityNode node : cityNodesList) {
-                if (node.city.equals(item.get(6))) {
-                    if (node.cityNodes == null) {
-                        node.cityNodes = new ArrayList<CityNode>();
-                    }
+                if (!node.city.equals(item.get(6))) {
+                    continue;
+                }
+
+                if (node.cityNodes == null) {
+                    node.cityNodes = new ArrayList<CityNode>();
                     node.cityNodes.add(new CityNode(item.get(4), null));
                     content.set(true);
                     break;
+                } else {
+                    for (int i = 0; i < node.cityNodes.size(); i++) {
+                        if (item.get(4).equals(node.cityNodes.get(i).city)) {
+                            content.set(true);
+                            break;
+                        }
+                    }
+                    if (!content.get()) {
+                        node.cityNodes.add(new CityNode(item.get(4), null));
+                    }
+                    content.set(false);
                 }
             }
         }
@@ -147,7 +168,7 @@ public class CityResource {
             }
         }
 
-
+        System.out.println(cityNodesList);
         ready = true;
         data.clear();
         return cityNodesList;
@@ -155,23 +176,6 @@ public class CityResource {
 
     }
 
-    private ArrayList<CityNode> getMoreNode(int type, String node) {
-        ArrayList<CityNode> arrayList = new ArrayList<>();
-        if (type == 1) {
-            for (ArrayList<String> item : data) {
-                if (node.equals(item.get(6))) {
-                    arrayList.add(new CityNode(item.get(4), getMoreNode(2, item.get(4))));
-                }
-            }
-        } else if (type == 2) {
-            for (ArrayList<String> item : data) {
-                if (node.equals(item.get(4))) {
-                    arrayList.add(new CityNode(item.get(2), null));
-                }
-            }
-        }
-        return arrayList;
-    }
 
 }
 

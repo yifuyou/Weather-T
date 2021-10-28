@@ -20,7 +20,6 @@ public class SharedPUtil {
         ArrayList<String> list = new ArrayList<>(stringSet);
         if(stringSet.size()<=1) {
             list.add(0,"广州");
-            list.add(1,"深圳");
         }
         return list;
     }
@@ -49,5 +48,11 @@ public class SharedPUtil {
         SharedPreferences sp = context.getSharedPreferences(sp_fileName, Context.MODE_PRIVATE);
         sp.edit().putString(cityString,city).apply();
     }
-
+    public static void setCities(Context context,ArrayList<String> cities){
+        SharedPreferences sp = context.getSharedPreferences(sp_fileName, Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        HashSet<String> hashSet=new HashSet<>(cities);
+        edit.putStringSet(citiesString,hashSet);
+        edit.apply();
+    }
 }

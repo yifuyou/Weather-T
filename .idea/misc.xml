@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/teal_ring.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2806621519939804" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/cities_manage.xml" value="0.33" />
         <entry key="app/src/main/res/layout/city_choose_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.13259668508287292" />
         <entry key="app/src/main/res/layout/f3_list_item_layout.xml" value="0.16770833333333332" />

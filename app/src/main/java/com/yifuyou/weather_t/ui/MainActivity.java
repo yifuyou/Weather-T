@@ -2,13 +2,18 @@ package com.yifuyou.weather_t.ui;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -31,64 +36,109 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<String> cities;
     private String city;
-    private ViewPager.OnPageChangeListener pageChangeListener;
+//    private ViewPager.OnPageChangeListener pageChangeListener;
     private CitiesWeatherViewPagerAdapter adapter;
     private ViewPager2Adapter adapter2;
 
+    private void citiesChange(){
+        if(cities.size()>4){
+            cities.remove(cities.get(0));
+        }
+        binding.toolbarLayout.removeAllViews();
+        cities.forEach(item->{
+            TextView textView = new TextView(MainActivity.this);
+            textView.setText(item);
+            textView.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+            binding.toolbarLayout.addView(textView);
+        });
+        adapter2.notifyCitiesChange(cities);
+    }
+
+    private void cityChange(String newCity){
+
+        TextView preChild = (TextView) (binding.toolbarLayout.getChildAt(cities.indexOf(city)));
+        if(preChild!=null){
+            preChild.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+        }
+
+        TextView child = (TextView) (binding.toolbarLayout.getChildAt(cities.indexOf(newCity)));
+        child.setTextColor(Color.WHITE);
+        city=newCity;
+    }
+
+   private void dataInit(){
+       city=getIntent().getStringExtra("city");
+       cities=getIntent().getStringArrayListExtra("cities");
+   }
+
+   private void viewInit(){
+       // viewpager init
+       // adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
+       // binding.weatherViewPager.setAdapter( adapter);
+       adapter2 = new ViewPager2Adapter(getSupportFragmentManager(),getLifecycle(),cities);
+       binding.weatherViewPager.setAdapter(adapter2);
+       binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
+       binding.toolbarLayout.removeAllViews();
+       cities.forEach(item->{
+           TextView textView = new TextView(MainActivity.this);
+           textView.setText(item);
+            textView.setTag(item);
+           textView.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+           binding.toolbarLayout.addView(textView);
+       });
+
+//        pageChangeListener = new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                binding.mainLayoutCity.setText(cities.get(position));
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        };
+//        binding.weatherViewPager.addOnPageChangeListener(pageChangeListener);
+       binding.weatherViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+           @Override
+           public void onPageSelected(int position) {
+               super.onPageSelected(position);
+               log(city+"  "+cities.get(position));
+               if(position==cities.indexOf(city)){
+                   cityChange(city);
+               }else{
+                   cityChange(cities.get(position));
+               }
 
 
+           }
+
+           @Override
+           public void onPageScrollStateChanged(int state) {
+               super.onPageScrollStateChanged(state);
+               log("onPageScrollStateChanged"+state);
+           }
+       });
+       binding.weatherViewPager.setOffscreenPageLimit(1);
+
+   }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         log("onCreate");
-        city=getIntent().getStringExtra("city");
-        cities=getIntent().getStringArrayListExtra("cities");
+        dataInit();
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        setSupportActionBar(binding.toolbar);
-
         //title 位置需要自定义，所以必须隐藏默认title
-        assert getSupportActionBar()!=null;
+        setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-
-//        adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
-//        binding.weatherViewPager.setAdapter( adapter);
-        adapter2 = new ViewPager2Adapter(getSupportFragmentManager(),getLifecycle(),cities);
-        binding.weatherViewPager.setAdapter(adapter2);
-        binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
-
-
-        pageChangeListener = new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                binding.mainLayoutCity.setText(cities.get(position));
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        };
-//        binding.weatherViewPager.addOnPageChangeListener(pageChangeListener);
-        binding.weatherViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                binding.mainLayoutCity.setText(cities.get(position));
-
-            }
-        });
-        binding.weatherViewPager.setOffscreenPageLimit(1);
-        binding.mainLayoutCity.setText(city);
+        viewInit();
         EventBus.getDefault().register(this);
 
     }
@@ -121,13 +171,13 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this, CitiesManageActivity.class));
             return true;
         }else if (id == R.id.action_addPlace) {
+            startActivityFromChild(new CitiesManageActivity(),new Intent(MainActivity.this,CitiesManageActivity.class),0x011);
             /*int index=cities.indexOf(city);
             city="广州";
             binding.mainLayoutCity.setText(city);
-//            adapter.notifyCitiesChange(city,CitiesWeatherViewPagerAdapter.TYPE_ADD);
+//            adapter.(city,CitiesWeatherViewPagerAdapter.TYPE_ADD);
 
             if(cities.contains(city)){
                 cities=new ArrayList<>();
@@ -175,10 +225,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         EventBus.getDefault().unregister(this);
+        SharedPUtil.setCities(this,cities);
         super.onDestroy();
     }
 
     private void log(String s){
         Log.i(s, "-----log----");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==0x011){
+            if(data==null){
+                return;
+            }
+                String newCity = data.getStringExtra("newCity");
+                if(newCity==null){
+                    return;
+                }
+                if(cities==null){
+                    cities=new ArrayList<>();
+                }else if(cities.contains(newCity)){
+                        return;
+                }
+                Log.i("onActivityResult", "onActivityResult: "+newCity);
+                cities.add(newCity);
+                citiesChange();
+                city=newCity;
+                binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
+
+        }
+    }
+
+    long lastPressed=0;
+    @Override
+    public void onBackPressed() {
+        if(System.currentTimeMillis()-lastPressed<1000){
+            super.onBackPressed();
+            return;
+        }
+        lastPressed=System.currentTimeMillis();
+        Toast.makeText(this,"more once backpressed for exit",Toast.LENGTH_SHORT).show();
     }
 }

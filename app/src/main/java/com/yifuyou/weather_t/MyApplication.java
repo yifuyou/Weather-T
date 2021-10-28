@@ -10,12 +10,24 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         CityResource.getInstance(getApplicationContext());
-        Log.i("TAG", "onCreate: ");
+        Log.i("MyApplication", "onCreate: ");
     }
 
     @Override
     public void onLowMemory() {
-        Log.i("TAG", "onLowMemory: ");
+        Log.i("MyApplication", "onLowMemory: ");
         super.onLowMemory();
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        Log.i("MyApplication", "finalize: ");
+        super.finalize();
+    }
+
+    @Override
+    public void onTerminate() {
+        Log.i("MyApplication", "onTerminate: ");
+        super.onTerminate();
     }
 }

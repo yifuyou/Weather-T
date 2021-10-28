@@ -45,9 +45,14 @@ public class CityNode {
     @NonNull
     @Override
     public String toString() {
-        return "CityNode{" +
-                "city='" + city + '\'' +
-                ", cityNodes=" + (cityNodes==null?"null":cityNodes) +
-                '}';
+        if(cityNodes!=null){
+            return "{" +
+                    "\"" + city + "\" : " +
+                    cityNodes +
+                    '}';
+        }else{
+            return "\"" + city + "\"";
+        }
+
     }
 }

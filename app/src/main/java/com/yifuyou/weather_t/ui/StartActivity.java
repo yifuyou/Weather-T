@@ -64,11 +64,12 @@ public class StartActivity extends AppCompatActivity {
         ArrayList<String> cities = SharedPUtil.getCities(getApplicationContext());
         String city = SharedPUtil.getCity(getApplicationContext());
 
-        Intent intent = new Intent(StartActivity.this, MainActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+
         intent.putExtra("city",city);
         intent.putExtra("cities",cities);
-
         startActivity(intent);
+        finish();
     }
 
 }
