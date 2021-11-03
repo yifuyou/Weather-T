@@ -53,7 +53,7 @@ public class RequestWeather {
         for (String s : args) {
                 url=url.concat(s)
                     .concat("=")
-                    .concat(map.getOrDefault(s,"Illegal"+s))
+                    .concat(map.getOrDefault(s,"Illegal-"+s))
                     .concat("&");
         }
         String s = url.concat(cityString).concat("=").concat(city);

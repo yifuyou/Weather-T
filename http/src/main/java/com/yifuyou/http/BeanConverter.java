@@ -15,31 +15,33 @@ import java.util.Objects;
 
 public class BeanConverter {
 
-    public static class BuilderJson{
-        public  BeanConverter build(){
+    public static class BuilderJson {
+        public BeanConverter build() {
             return new BeanConverter();
         }
     }
+
     public DayWeather convertJsonDayWeather(JSONObject o) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class<?> aClass = Class.forName("com.yifuyou.http.pojo.DayWeather");
-        DayWeather instance = (DayWeather)aClass.newInstance();
+        DayWeather instance = (DayWeather) aClass.newInstance();
         Field[] fields = aClass.getDeclaredFields();
         for (Field field : fields) {
-            try{
+            try {
                 Object o1 = o.get(field.getName());
-                if(field.getType().equals(String.class)){
+                if (field.getType().equals(String.class)) {
 
-                    field.set(instance,String.valueOf(o1));
-                }else {
-                    field.set(instance,converted(field.getType().newInstance(),o1,field.getName()));
+                    field.set(instance, String.valueOf(o1));
+                } else {
+                    field.set(instance, converted(field.getType().newInstance(), o1, field.getName()));
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return instance;
     }
-    public Object converted(Object ins,Object obj,String type) throws JSONException, IllegalAccessException, InstantiationException {
+
+    public Object converted(Object ins, Object obj, String type) throws JSONException, IllegalAccessException, InstantiationException {
         Class<?> aClass = ins.getClass();
         if (obj.getClass().equals(JSONObject.class)) {
 
@@ -57,7 +59,7 @@ public class BeanConverter {
                 throw new IllegalAccessException("request List<> but got " + ins.getClass());
             } else {
                 JSONArray jsonArray = (JSONArray) obj;
-                if(!(jsonArray.get(0) instanceof JSONObject)){
+                if (!(jsonArray.get(0) instanceof JSONObject)) {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         Object o = jsonArray.get(i);
                         ((List) ins).add(o);
@@ -84,14 +86,11 @@ public class BeanConverter {
 
             }
 
-        }else {
+        } else {
             throw new IllegalAccessException("converted fail ");
         }
         return ins;
     }
-
-
-
 
 
 }
