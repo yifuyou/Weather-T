@@ -8,11 +8,13 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:padding="6dp"
-        android:id="@+id/text_2" />
+        android:id="@+id/text_2"
+        android:background="@drawable/text_bg_drawable"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/recyc_2"
+        android:background="@drawable/recyclerview_bg_drawable"
         />
 
 </LinearLayout>

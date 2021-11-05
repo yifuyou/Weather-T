@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,56 +37,63 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ArrayList<String> cities;
     private String city;
-//    private ViewPager.OnPageChangeListener pageChangeListener;
+    //    private ViewPager.OnPageChangeListener pageChangeListener;
     private CitiesWeatherViewPagerAdapter adapter;
     private ViewPager2Adapter adapter2;
 
-    private void citiesChange(){
-        if(cities.size()>4){
+    private void citiesChange() {
+        if (cities.size() > 4) {
             cities.remove(cities.get(0));
         }
         binding.toolbarLayout.removeAllViews();
-        cities.forEach(item->{
+//        binding.toolbarLayout.setDividerDrawable(getDrawable(R.drawable.drawable_divider));
+//        binding.toolbarLayout.setDividerPadding(10);
+//        binding.toolbarLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        cities.forEach(item -> {
             TextView textView = new TextView(MainActivity.this);
             textView.setText(item);
-            textView.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+            textView.setTextColor(Color.WHITE);
             binding.toolbarLayout.addView(textView);
         });
         adapter2.notifyCitiesChange(cities);
     }
 
-    private void cityChange(String newCity){
+    private void cityChange(String newCity) {
 
         TextView preChild = (TextView) (binding.toolbarLayout.getChildAt(cities.indexOf(city)));
-        if(preChild!=null){
-            preChild.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+        if (preChild != null) {
+            preChild.setTextColor(Color.WHITE);
         }
-
         TextView child = (TextView) (binding.toolbarLayout.getChildAt(cities.indexOf(newCity)));
-        child.setTextColor(Color.WHITE);
-        city=newCity;
+        child.setTextColor(getResources().getColor(R.color.toolbar_text_color));
+        city = newCity;
     }
 
-   private void dataInit(){
-       city=getIntent().getStringExtra("city");
-       cities=getIntent().getStringArrayListExtra("cities");
-   }
+    private void dataInit() {
+        city = getIntent().getStringExtra("city");
+        cities = getIntent().getStringArrayListExtra("cities");
+    }
 
-   private void viewInit(){
-       // viewpager init
-       // adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
-       // binding.weatherViewPager.setAdapter( adapter);
-       adapter2 = new ViewPager2Adapter(getSupportFragmentManager(),getLifecycle(),cities);
-       binding.weatherViewPager.setAdapter(adapter2);
-       binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
-       binding.toolbarLayout.removeAllViews();
-       cities.forEach(item->{
-           TextView textView = new TextView(MainActivity.this);
-           textView.setText(item);
+    private void viewInit() {
+        // viewpager init
+        // adapter = new CitiesWeatherViewPagerAdapter(getSupportFragmentManager(),  cities);
+        // binding.weatherViewPager.setAdapter( adapter);
+        adapter2 = new ViewPager2Adapter(getSupportFragmentManager(), getLifecycle(), cities);
+        binding.weatherViewPager.setAdapter(adapter2);
+        binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
+        binding.toolbarLayout.removeAllViews();
+        binding.toolbarLayout.setDividerDrawable(getDrawable(R.drawable.drawable_divider));
+        binding.toolbarLayout.setDividerPadding(10);
+        binding.toolbarLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+        cities.forEach(item -> {
+            TextView textView = new TextView(MainActivity.this);
+            textView.setText(item);
             textView.setTag(item);
-           textView.setTextColor(getResources().getColor(R.color.toolbar_text_color));
-           binding.toolbarLayout.addView(textView);
-       });
+            textView.setTextColor(
+                    item.equals(city) ? getResources().getColor(R.color.toolbar_text_color):Color.WHITE);
+
+            binding.toolbarLayout.addView(textView);
+        });
 
 //        pageChangeListener = new ViewPager.OnPageChangeListener() {
 //            @Override
@@ -104,29 +112,29 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        };
 //        binding.weatherViewPager.addOnPageChangeListener(pageChangeListener);
-       binding.weatherViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-           @Override
-           public void onPageSelected(int position) {
-               super.onPageSelected(position);
-               log(city+"  "+cities.get(position));
-               if(position==cities.indexOf(city)){
-                   cityChange(city);
-               }else{
-                   cityChange(cities.get(position));
-               }
+        binding.weatherViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                log(city + "  " + cities.get(position));
+                if (position == cities.indexOf(city)) {
+                    cityChange(city);
+                } else {
+                    cityChange(cities.get(position));
+                }
 
 
-           }
+            }
 
-           @Override
-           public void onPageScrollStateChanged(int state) {
-               super.onPageScrollStateChanged(state);
-               log("onPageScrollStateChanged"+state);
-           }
-       });
-       binding.weatherViewPager.setOffscreenPageLimit(1);
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                log("onPageScrollStateChanged" + state);
+            }
+        });
+        binding.weatherViewPager.setOffscreenPageLimit(1);
 
-   }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,9 +156,17 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
     }
 
+
+    @Override
+    protected void onPause() {
+        EventBus.getDefault().unregister(this);
+        SharedPUtil.setCities(this, cities);
+        super.onPause();
+    }
+
     @Override
     protected void onStop() {
-        SharedPUtil.setCity(this,city);
+        SharedPUtil.setCity(this, city);
         super.onStop();
     }
 
@@ -171,9 +187,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            startActivity(new Intent(MainActivity.this,SecondActivity.class));
             return true;
-        }else if (id == R.id.action_addPlace) {
-            startActivityFromChild(new CitiesManageActivity(),new Intent(MainActivity.this,CitiesManageActivity.class),0x011);
+        } else if (id == R.id.action_addPlace) {
+            startActivityFromChild(new CitiesManageActivity(), new Intent(MainActivity.this, CitiesManageActivity.class), 0x011);
             /*int index=cities.indexOf(city);
             city="广州";
             binding.mainLayoutCity.setText(city);
@@ -206,66 +223,66 @@ public class MainActivity extends AppCompatActivity {
 //        EventBus.getDefault().post(e);
     }
 
-    public String getCity(){
+    public String getCity() {
         return this.city;
     }
-    public ArrayList<String> getCities(){
+
+    public ArrayList<String> getCities() {
         return this.cities;
     }
 
 
     @Override
     public int checkPermission(String permission, int pid, int uid) {
-        if(permission==null){
-            permission= Manifest.permission.INTERNET;
+        if (permission == null) {
+            permission = Manifest.permission.INTERNET;
         }
         return super.checkPermission(permission, pid, uid);
     }
 
     @Override
     protected void onDestroy() {
-        EventBus.getDefault().unregister(this);
-        SharedPUtil.setCities(this,cities);
         super.onDestroy();
     }
 
-    private void log(String s){
+    private void log(String s) {
         Log.i(s, "-----log----");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==0x011){
-            if(data==null){
+        if (resultCode == 0x011) {
+            if (data == null) {
                 return;
             }
-                String newCity = data.getStringExtra("newCity");
-                if(newCity==null){
-                    return;
-                }
-                if(cities==null){
-                    cities=new ArrayList<>();
-                }else if(cities.contains(newCity)){
-                        return;
-                }
-                Log.i("onActivityResult", "onActivityResult: "+newCity);
-                cities.add(newCity);
-                citiesChange();
-                city=newCity;
-                binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
+            String newCity = data.getStringExtra("newCity");
+            if (newCity == null) {
+                return;
+            }
+            if (cities == null) {
+                cities = new ArrayList<>();
+            } else if (cities.contains(newCity)) {
+                return;
+            }
+            Log.i("onActivityResult", "onActivityResult: " + newCity);
+            cities.add(newCity);
+            citiesChange();
+            city = newCity;
+            binding.weatherViewPager.setCurrentItem(cities.indexOf(city));
 
         }
     }
 
-    long lastPressed=0;
+    long lastPressed = 0;
+
     @Override
     public void onBackPressed() {
-        if(System.currentTimeMillis()-lastPressed<1000){
+        if (System.currentTimeMillis() - lastPressed < 1000) {
             super.onBackPressed();
             return;
         }
-        lastPressed=System.currentTimeMillis();
-        Toast.makeText(this,"more once backpressed for exit",Toast.LENGTH_SHORT).show();
+        lastPressed = System.currentTimeMillis();
+        Toast.makeText(this, "more once backpressed for exit", Toast.LENGTH_SHORT).show();
     }
 }

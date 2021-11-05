@@ -17,9 +17,7 @@ public class SecondActivity extends AppCompatActivity {
         ActivityTempBinding binding=ActivityTempBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         binding.gotoFirst.setOnClickListener((view)->{
-            startActivity(new Intent(SecondActivity.this, MainActivity.class));
-
-
+            onBackPressed();
         });
     }
 }

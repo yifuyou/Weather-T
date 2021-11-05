@@ -5,7 +5,35 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:orientation="vertical"
+    android:layout_marginTop="@dimen/default_textView_high"
+    android:padding="10dp"
         >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已选城市："
+        />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:id="@+id/cities_click_layout"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:text="placeholderText"
+            />
+        <TextView
+        android:layout_height="wrap_content"
+        android:text="placeholderText"
+        />
+    </GridLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

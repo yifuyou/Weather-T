@@ -9,14 +9,17 @@
         <entry key="app/src/main/res/drawable/aa_dialog_bg.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bg_p2_fragment.xml" value="0.12447916666666667" />
         <entry key="app/src/main/res/drawable/content_bg.xml" value="0.12447916666666667" />
+        <entry key="app/src/main/res/drawable/drawable_divider.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/drawable/recyclerview_bg_drawable.xml" value="0.184375" />
         <entry key="app/src/main/res/drawable/start_page.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/drawable/teal_ring.xml" value="0.31666666666666665" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2806621519939804" />
+        <entry key="app/src/main/res/drawable/text_bg_drawable.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2721145745577085" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.25" />
         <entry key="app/src/main/res/layout/cities_manage.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/city_choose_layout.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/city_choose_layout.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.13259668508287292" />
         <entry key="app/src/main/res/layout/f3_list_item_layout.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_0_layout.xml" value="0.33" />

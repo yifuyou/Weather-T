@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".ui.MainActivity" android:theme="@style/Theme.WeatherT.NoActionBar" android:launchMode="singleTop"/>
         <activity android:name=".ui.SecondActivity"/>
-        <activity android:name=".ui.CitiesManageActivity" >
+        <activity android:name=".ui.CitiesManageActivity" android:theme="@style/Theme.AppCompat.Light">
         </activity>
     </application>
 
