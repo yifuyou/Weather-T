@@ -23,6 +23,15 @@ public class ResponseWeather {
 
         JSONObject jsonObject=new JSONObject(source);
         Log.i(TAG, "wrapperJson: source  :"+source);
+        try {
+            String code = jsonObject.getString("errcode");
+            System.out.println(code);
+            if(code!=null){
+                return responseWeather;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         responseWeather.cityid=jsonObject.getString("cityid");
         responseWeather.city=jsonObject.getString("city");
         responseWeather.cityEn= jsonObject.getString("cityEn");

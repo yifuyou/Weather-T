@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -79,7 +80,13 @@ public class FirstFragment extends BaseFragment {
                         .addFragment(new Fragment_2("flag2".concat(getType())))
                         .addFragment(new Fragment_3("flag3".concat(getType())))
                         .flash();
-                EventBus.getDefault().post(new EventMainUI(200,getType(),s));
+                if(s.getData()==null||s.getData().isEmpty()) {
+                    Toast.makeText(getContext(),"no data !!",Toast.LENGTH_SHORT).show();
+
+                }else{
+                    EventBus.getDefault().post(new EventMainUI(200,getType(),s));
+                }
+
             }
         });
     }
