@@ -32,15 +32,9 @@ public class StartActivity extends AppCompatActivity {
         wholeTime=System.currentTimeMillis();
         ImageView imageView=findViewById(R.id.start_sun);
         ValueAnimator valueAnimator = ObjectAnimator.ofFloat(imageView,"rotation",-15f,15f,-15f)
-                .setDuration(3000L);
-        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if(System.currentTimeMillis()-wholeTime >5000L){
-                    goToMain();
-                }
-            }
-        });
+                .setDuration(400L);
+        valueAnimator.setRepeatCount(10);
+
         valueAnimator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
@@ -48,13 +42,11 @@ public class StartActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animator animation) {
-                valueAnimator.reverse();
+                goToMain();
             }
 
             @Override
             public void onAnimationCancel(Animator animation) {
-                animation.cancel();
-                animation.pause();
             }
 
             @Override
