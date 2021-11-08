@@ -31,10 +31,15 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONObject;
 
+import java.lang.ref.WeakReference;
+import java.sql.Date;
+import java.sql.Time;
+
 public class FirstFragment extends BaseFragment {
 
     private FragmentFirstBinding binding;
     private FragmentsManager fm;
+    private Long lastFlashTime=0L;
 
     public FirstFragment(String type) {
         super(type);
@@ -45,15 +50,14 @@ public class FirstFragment extends BaseFragment {
         this("parent_main");
     }
 
-
-
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-        binding = FragmentFirstBinding.inflate(inflater, container, false);
+        if(binding==null){
+            binding = FragmentFirstBinding.inflate(inflater, container, false);
+        }
         return binding.getRoot();
     }
 
@@ -64,12 +68,22 @@ public class FirstFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        setWeather(getType());
+            setWeather(getType());
 //        fm=new FragmentsManager(getChildFragmentManager(),R.id.first_layout_list);
 //        fm.addFragment(new Fragment_2("flag2".concat(getType()))).flash();
     }
 
+    protected boolean needToFlash(){
+        WeakReference<Time> timeWeakReference=new WeakReference<Time>(new Time(System.currentTimeMillis()-lastFlashTime));
+        lastFlashTime= System.currentTimeMillis();
+        return timeWeakReference.get().getHours() >= 1;
+    }
+
     private void setWeather(String city){
+        if(fm!=null&& needToFlash()){
+            return;
+        }
+        System.out.println("needtoflash" +(fm==null));
         MutableLiveData<ResponseWeather> stringMutableLiveData = RequestUtil.getWeatherMsgByCity(city);
         stringMutableLiveData.observe(getViewLifecycleOwner(), new Observer<ResponseWeather>() {
             @Override

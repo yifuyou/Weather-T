@@ -19,6 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/f3_list_layout"/>
+            android:id="@+id/f3_list_layout"
+            android:divider="@drawable/drawable_divider"
+            android:showDividers="middle|beginning|end"
+            />
     </HorizontalScrollView>
 </LinearLayout>

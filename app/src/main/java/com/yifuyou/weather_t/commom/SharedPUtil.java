@@ -18,7 +18,7 @@ public class SharedPUtil {
         SharedPreferences sp = context.getSharedPreferences(sp_fileName, Context.MODE_PRIVATE);
         Set<String> stringSet = sp.getStringSet(citiesString, new HashSet<>());
         ArrayList<String> list = new ArrayList<>(stringSet);
-        if(stringSet.size()<=1) {
+        if(stringSet.size()<1) {
             list.add(0,"广州");
         }
         return list;

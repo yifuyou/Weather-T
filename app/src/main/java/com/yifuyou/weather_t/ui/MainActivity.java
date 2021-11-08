@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 log("onPageScrollStateChanged" + state);
             }
         });
-        binding.weatherViewPager.setOffscreenPageLimit(1);
+        binding.weatherViewPager.setOffscreenPageLimit(3);
 
     }
 
@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Subscribe
     public void eventListener(EventMainUI e) throws JSONException {
-        System.out.println(e);
+//        System.out.println(e);
 //        EventBus.getDefault().post(e);
     }
 
