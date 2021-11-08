@@ -35,11 +35,9 @@
     </style>
     
     
-    <style name="Theme.WeatherT.launch">
-        <item name="android:windowBackground">@drawable/start_page</item>
-        <item name="windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-
+    <style name="Theme.WeatherT.launch" parent="Theme.WeatherT.NoActionBar">
+<!--        <item name="android:windowBackground">@drawable/start_page</item>-->
+        <item name="android:windowSplashscreenContent">@drawable/start_page</item>
     </style>
     
 </resources>
