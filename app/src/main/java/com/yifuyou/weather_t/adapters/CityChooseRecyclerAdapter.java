@@ -1,7 +1,6 @@
 package com.yifuyou.weather_t.adapters;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,8 +169,5 @@ public class CityChooseRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
         }
     }
 
-    public interface ClickListener{
-        void onClick(Map<String,String> map);
-    }
 }
 

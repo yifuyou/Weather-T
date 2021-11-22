@@ -16,10 +16,12 @@
         <entry key="app/src/main/res/drawable/start_page.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/drawable/teal_ring.xml" value="0.31666666666666665" />
         <entry key="app/src/main/res/drawable/text_bg_drawable.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/title_bg_drawable.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2721145745577085" />
         <entry key="app/src/main/res/layout/activity_temp.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/cities_manage.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/cities_manage.xml" value="0.1" />
         <entry key="app/src/main/res/layout/city_choose_layout.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/city_picker_layout.xml" value="0.26222826086956524" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.13259668508287292" />
         <entry key="app/src/main/res/layout/f3_list_item_layout.xml" value="0.16770833333333332" />
         <entry key="app/src/main/res/layout/fragment_0_layout.xml" value="0.33" />
@@ -27,7 +29,9 @@
         <entry key="app/src/main/res/layout/fragment_2_layout.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/setting_layout.xml" value="0.146875" />
         <entry key="app/src/main/res/layout/start_layout.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/toast_layout.xml" value="0.146875" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.33" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.18385416666666668" />

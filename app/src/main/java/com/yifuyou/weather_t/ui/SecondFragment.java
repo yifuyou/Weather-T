@@ -7,10 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.yifuyou.weather_t.R;
-import com.yifuyou.weather_t.base.BaseFragment;
 import com.yifuyou.weather_t.databinding.FragmentSecondBinding;
 
 public class SecondFragment extends Fragment {

@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.yifuyou.common.ToastUtil;
 import com.yifuyou.weather_t.commom.CityResource;
 
 public class MyApplication extends Application {
@@ -16,6 +17,7 @@ public class MyApplication extends Application {
         super.onCreate();
         CityResource.getInstance(getApplicationContext());
         registerActivityLifecycleCallbacks(new LifeCycleCallback());
+        ToastUtil.init(getApplicationContext());
         Log.i("MyApplication", "onCreate: ");
     }
 

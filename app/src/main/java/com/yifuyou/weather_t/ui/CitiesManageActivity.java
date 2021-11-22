@@ -24,12 +24,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.yifuyou.weather_t.R;
 import com.yifuyou.weather_t.adapters.CityChooseRecyclerAdapter;
+import com.yifuyou.weather_t.adapters.CityPickerBuilder;
+import com.yifuyou.weather_t.adapters.ClickListener;
 import com.yifuyou.weather_t.commom.CityNode;
 import com.yifuyou.weather_t.commom.CityResource;
 import com.yifuyou.weather_t.commom.SharedPUtil;
 import com.yifuyou.weather_t.databinding.CitiesManageBinding;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class CitiesManageActivity extends AppCompatActivity {
     private CitiesManageBinding binding;
@@ -71,14 +74,23 @@ public class CitiesManageActivity extends AppCompatActivity {
         citiesRes = CityResource.getInstance(getApplicationContext());
 
 
-        binding.recyc1.setLayoutManager(new LinearLayoutManager(this));
+/*        binding.recyc1.setLayoutManager(new LinearLayoutManager(this));
         binding.recyc1.post(()->{
 
             adapterInit();
             binding.recyc1.setAdapter(adapter);
+        });*/
+
+        CityPickerBuilder cityPicker = new CityPickerBuilder(this);
+        cityPicker.setDate(citiesRes.parseNodes());
+        cityPicker.setOnItemClickListen(new com.yifuyou.weather_t.adapters.ClickListener() {
+            @Override
+            public void onClick(Map<String, String> map) {
+                binding.chooseResult.setText(map.get("city0")+" - "+map.get("city1")+" - "+map.get("city2"));
+                city=map.get("city2");
+            }
         });
-
-
+        binding.getRoot().addView(cityPicker.getView());
         binding.buttonChoose.setOnClickListener(
                 (view) -> {
                     Intent data=new Intent();
@@ -88,8 +100,6 @@ public class CitiesManageActivity extends AppCompatActivity {
                     finish();
                 }
         );
-
-
     }
 
     @SuppressLint("SetTextI18n")

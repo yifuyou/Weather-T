@@ -4,19 +4,15 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.yifuyou.weather_t.CitiesWeatherViewPagerAdapter;
@@ -187,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            startActivity(new Intent(MainActivity.this,SecondActivity.class));
+            startActivity(new Intent(MainActivity.this, SettingActivity.class));
             return true;
         } else if (id == R.id.action_addPlace) {
             startActivityFromChild(new CitiesManageActivity(), new Intent(MainActivity.this, CitiesManageActivity.class), 0x011);
